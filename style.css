@@ -31,7 +31,10 @@ body {
     outline: none;
     box-shadow: none;
 }
-
+input#code_Input, #code_output {
+    font-size: 1.5rem;
+    text-align: center;
+}
 input[type='text']{
     background-color: #3D4153;
     padding: 10px 0px;
@@ -103,4 +106,8 @@ color: #E0B612;
 .action-left {
     color: #FF3C5F;
     margin-top: 10px;
+}
+
+.notify-section > .notify{
+    display: none;
 }

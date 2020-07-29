@@ -6,7 +6,7 @@
     <title>Pin Generator</title>
     <!-- bootstrap CDN goes here -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    
+
     <!-- style.css linking -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,34 +15,34 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
-                </div>
+                    <input id="code_Input" class="form-control" type="text" placeholder="Generate_Pin">
+                    <button onclick="generateCode()" id="generate-button" class="generate-btn" >Generate Pin</button>
+                </div> <!-- pin-generator section end -->
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="code_output" class="form-control" type="text" placeholder="Input_Pin">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div class="button" onclick="code_output.value += '7'">7</div>
+                              <div class="button" onclick="code_output.value += '8'">8</div>
+                              <div class="button" onclick="code_output.value += '9'">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div class="button" onclick="code_output.value += '4'">4</div>
+                              <div class="button" onclick="code_output.value += '5'">5</div>
+                              <div class="button" onclick="code_output.value += '6'">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div class="button" onclick="code_output.value += '1'">1</div>
+                              <div class="button" onclick="code_output.value += '2'">2</div>
+                              <div class="button" onclick="code_output.value += '3'">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
+                                <div class="button" onclick="code_output.value = code_output.value.slice(0, -1)"><</div>
+                                <div class="button" onclick="code_output.value += '0'">0</div>
+                                <div class="button" onclick="code_output.value = ''">C</div>
                             </div>
                             <div>
                                 <button type="submit" class="submit-btn">Submit</button>
@@ -53,8 +53,8 @@
             </div>
         </div>
         <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            <p id="match-pin" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="not-match-pin" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
 
@@ -63,6 +63,11 @@
 
     <!--------- JS code goes here ----------->
     <script>
+        function generateCode(){
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("code_Input").value = randomNum;
+        }
+        
 
     </script>
 </body>

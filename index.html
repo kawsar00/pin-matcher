@@ -45,30 +45,62 @@
                                 <div class="button" onclick="code_output.value = ''">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
-                            </div>
+                                <button onclick="pinMatch()" id="submit-button"  type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left"> <span id="tryLeft">3</span> try left</p>
+                            </div> <!-- tryLeft section end -->
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> <!-- input section end -->
+            </div> 
+        </div> <!--row end -->
         <div class="notify-section">
-            <p id="match-pin" class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p id="not-match-pin" class="notify">✅ Pin Matched... Secret door is opening for you</p>
-        </div>
-    </div>
+            <p id="pin-not-match" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="pin-matched" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div> <!-- notify-section end -->
+    </div> <!-- container end -->
 
 
 
 
     <!--------- JS code goes here ----------->
     <script>
+        //this function is for generate pin
         function generateCode(){
             const randomNum = Math.floor(1000 + Math.random() * 9000);
             document.getElementById("code_Input").value = randomNum;
+            document.getElementById("pin-not-match").style.display = 'none';
+            document.getElementById("pin-matched").style.display = 'none';   
         }
         
+        //this function is for tryLeft section
+        function tryLeft() {
+            const tryLeftNumber = document.getElementById("tryLeft");
+            const tryLeftValue = parseFloat(tryLeftNumber.innerText);
+            const remainingTry = tryLeftValue - 1;
+            tryLeftNumber.innerText = remainingTry;
+            if(tryLeftNumber.innerText == 0){
+                document.getElementById('submit-button').style.display = 'none'
+            }
+        }
 
+        //this function is for pin matching checker
+        function pinMatch() {
+        const getGenerateCode = document.getElementById("code_Input").value
+            const getInputCode = document.getElementById("code_output").value
+
+            if(getGenerateCode == '' || getInputCode == ''){
+                alert('Please Input Pin');
+            }
+            else if(getGenerateCode == getInputCode){
+                document.getElementById("pin-matched").style.display = 'block';
+                document.getElementById("pin-not-match").style.display = 'none';
+            }
+            else{
+                document.getElementById("pin-not-match").style.display = 'block';
+                document.getElementById("pin-matched").style.display = 'none';
+                tryLeft()
+            }   
+        }
+        
     </script>
 </body>
 </html>
